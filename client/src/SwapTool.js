@@ -10,7 +10,7 @@ function SwapTool({ futuresContract, targetContract, account }) {
 
   const handleSwap = useCallback(() => {
     futuresContract.methods
-      .burn(100)
+      .burn(futuresBalance)
       .send()
       .on("transactionHash", function(hash) {
         console.log("hash", hash);
@@ -23,7 +23,7 @@ function SwapTool({ futuresContract, targetContract, account }) {
         setSwapReceipt(receipt);
       })
       .on("error", console.error);
-  }, [futuresContract.methods]);
+  }, [futuresBalance, futuresContract.methods]);
 
   useEffect(() => {
     futuresContract.methods
